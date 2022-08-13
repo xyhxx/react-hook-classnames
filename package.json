@@ -1,6 +1,6 @@
 {
   "name": "react-hook-classnames",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple and convenient of hooks of classNames, support modules css,joining classNames...",
   "scripts": {
     "build": "vite build",

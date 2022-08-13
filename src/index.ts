@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 
-type ObjectClassNames = Record<string, unknown>;
-type ClassNamesArgs = Array<ObjectClassNames | string | null | undefined | ClassNamesArgs>;
+export type ObjectClassNames = Record<string, unknown>;
+export type ClassNamesArgs = Array<ObjectClassNames | string | null | undefined | ClassNamesArgs>;
 type CSSModuleClasses = Record<string, string>;
 
 function transition(source: string, camel?: string) {
