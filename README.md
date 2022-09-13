@@ -12,8 +12,8 @@
 
 join classnames
 
-``` react
-const [_, cls] = useClassNames();
+```react
+const [cls] = useClassNames();
 
 cls('a', 'b', 'c', null, undefined); // 'a b c'
 cls(['a', 'b', 'c', 'd', null, undefined]); // 'a b c d'
@@ -35,34 +35,27 @@ cls({
 }); // a c d e h i g
 ```
 
-
-
 use module.css
 
-``` css
+```css
 // index.module.css
 
 .title {
-	color: pink;
+  color: pink;
 }
 
 .title-font {
-    font-size: 20px;
+  font-size: 20px;
 }
-
 ```
 
-``` react
+```react
 import style from './index.module.css';
 
-const [css] = useClassnames({styleSheet: style, camelTransition: '-'});
+const [,css] = useClassnames({styleSheet: style, camelTransition: '-'});
 console.log(css.title); // title-xFi12
 console.log(css.titleFont); // title-font-FEgi1
 ```
-
-
-
-
 
 # MIT
 
@@ -90,4 +83,3 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ```
-
