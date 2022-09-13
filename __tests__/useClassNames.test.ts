@@ -14,7 +14,7 @@ const mockClass = {
 
 test('join string', function () {
   const { result } = renderHook(function () {
-    const [_, cls] = useClassNames();
+    const [cls] = useClassNames();
     return cls('a', 'b', 'c', null, undefined);
   });
 
@@ -23,7 +23,7 @@ test('join string', function () {
 
 test('join array class', function () {
   const { result } = renderHook(function () {
-    const [_, cls] = useClassNames();
+    const [cls] = useClassNames();
 
     return cls(['a', 'b', 'c', 'd', null, undefined]);
   });
@@ -33,7 +33,7 @@ test('join array class', function () {
 
 test('join object class', function () {
   const { result } = renderHook(function () {
-    const [_, cls] = useClassNames();
+    const [cls] = useClassNames();
 
     return cls({
       a: true,
@@ -58,7 +58,7 @@ test('join object class', function () {
 
 test('use module.css', function () {
   const { result } = renderHook(function () {
-    const [style] = useClassNames({ styleSheet: mockClass });
+    const [, style] = useClassNames({ styleSheet: mockClass });
 
     return style;
   });
@@ -69,7 +69,7 @@ test('use module.css', function () {
 
 test('add prefix', function () {
   const { result } = renderHook(function () {
-    const [style] = useClassNames({ styleSheet: mockClass, prefix: 'info-' });
+    const [, style] = useClassNames({ styleSheet: mockClass, prefix: 'info-' });
 
     return style;
   });
@@ -80,7 +80,7 @@ test('add prefix', function () {
 
 test('camel transition', function () {
   const { result } = renderHook(function () {
-    const [style] = useClassNames({ styleSheet: mockClass, camelTransition: '-' });
+    const [, style] = useClassNames({ styleSheet: mockClass, camelTransition: '-' });
 
     return style;
   });

@@ -1,8 +1,32 @@
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 
 export type ObjectClassNames = Record<string, unknown>;
 export type ClassNamesArgs = Array<ObjectClassNames | string | null | undefined | ClassNamesArgs>;
 type CSSModuleClasses = Record<string, string>;
+
+function parseClassNames(...args: ClassNamesArgs) {
+  const classNames: string[] = [];
+
+  args.forEach(function (val) {
+    if (typeof val === 'string') {
+      classNames.push(val);
+    } else if (Array.isArray(val)) {
+      const result = parseClassNames(...val);
+      classNames.push(result);
+    } else {
+      for (const key in val) {
+        if (!Object.prototype.hasOwnProperty.call(val, key)) continue;
+        const value = val[key];
+        const result = typeof value === 'function' ? value() : value;
+        if (result) {
+          classNames.push(key);
+        }
+      }
+    }
+  });
+
+  return classNames.join(' ');
+}
 
 function transition(source: string, camel?: string) {
   if (!camel) return source;
@@ -41,29 +65,7 @@ export function useClassNames({
     [prefix, styleSheet, camelTransition],
   );
 
-  const parseClassNames = useCallback(function (...args: ClassNamesArgs) {
-    const classNames: string[] = [];
-
-    args.forEach(function (val) {
-      if (typeof val === 'string') {
-        classNames.push(val);
-      } else if (Array.isArray(val)) {
-        const result = parseClassNames(...val);
-        classNames.push(result);
-      } else {
-        for (const key in val) {
-          if (!Object.prototype.hasOwnProperty.call(val, key)) continue;
-          const value = val[key];
-          const result = typeof value === 'function' ? value() : value;
-          if (result) {
-            classNames.push(key);
-          }
-        }
-      }
-    });
-
-    return classNames.join(' ');
-  }, []);
-
-  return [style, parseClassNames] as const;
+  return [parseClassNames, style] as const;
 }
+
+export { parseClassNames as classNames };
