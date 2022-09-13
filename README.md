@@ -13,7 +13,8 @@
 join classnames
 
 ```react
-const [cls] = useClassNames();
+// import {classNames as cls} from 'react-hook-classnames'
+const [,cls] = useClassNames();
 
 cls('a', 'b', 'c', null, undefined); // 'a b c'
 cls(['a', 'b', 'c', 'd', null, undefined]); // 'a b c d'
@@ -52,7 +53,7 @@ use module.css
 ```react
 import style from './index.module.css';
 
-const [,css] = useClassnames({styleSheet: style, camelTransition: '-'});
+const [css] = useClassnames({styleSheet: style, camelTransition: '-'});
 console.log(css.title); // title-xFi12
 console.log(css.titleFont); // title-font-FEgi1
 ```

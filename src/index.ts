@@ -65,7 +65,7 @@ export function useClassNames({
     [prefix, styleSheet, camelTransition],
   );
 
-  return [parseClassNames, style] as const;
+  return [style, parseClassNames] as const;
 }
 
 export { parseClassNames as classNames };
